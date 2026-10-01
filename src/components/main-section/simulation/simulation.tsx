@@ -343,9 +343,13 @@ const Simulation = () => {
     }
   };
 
+  // Start is only offered while Offline, so build the run from the setup as
+  // it is now: the preview drawn before may predate population, gap or
+  // network changes.
   const startSimulation = () => {
+    savedData.current = createRunData(options.gapWidth);
     setSimulationState("Online");
-    simulation(speed, false);
+    simulation(speed, true);
   };
 
   const pauseSimulation = () => {
