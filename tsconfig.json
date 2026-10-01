@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2024",
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    // `vite/client` declares the asset modules (`*.css`, `*.svg`, `*.png`)
+    // that `src/` imports. Without it TypeScript 7 rejects them with TS2882.
+    "types": ["vite/client"],
+    // `~/` is the only way up the tree: oxlint bans `../` imports. Vite and
+    // Vitest read this via `resolve.tsconfigPaths`.
+    "paths": { "~/*": ["./src/*"] }
+  },
+  "include": ["src", "vite.config.ts", "vitest.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}
