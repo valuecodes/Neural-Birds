@@ -3,3 +3,4 @@ dist/
 .cache/
 # Pre-trained bird weights, kept as generated.
 src/components/main-section/simulation/animation/alfa-settings.json
+.wrangler/

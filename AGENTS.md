@@ -18,7 +18,7 @@ algorithm, with Chart.js charts of each generation.
 | `src/components/main-section/simulation/`   | Canvas simulation: game rules, drawing, animation loop, genetic algorithm  |
 | `src/components/main-section/simulation/*/` | Option panels, charts and the visual pages (network, bird view, tree, DNA) |
 | `src/utils/`                                | Shared small components and image imports                                  |
-| `public/`                                   | Static files served as-is (favicon, README screenshots)                    |
+| `public/`                                   | Static files served as-is (favicon, README screenshots, `_headers`)        |
 
 oxlint bans `../` imports: inside `src/` use the `~/` alias (`src/*`) to go up
 the tree. Files are kebab-case, components are arrow functions, and every module
@@ -40,6 +40,7 @@ pnpm typecheck                   # tsc
 pnpm test                        # vitest run
 pnpm build                       # vite build into dist/
 pnpm preview                     # serve the production build
+pnpm run deploy                  # build, then wrangler deploy to Cloudflare
 pnpm format                      # prettier --write .
 pnpm format:check                # prettier --check . (no writes)
 pnpm secrets:scan                # gitleaks over the full git history
@@ -59,6 +60,25 @@ image. It exits 0 when clean and 1 when it finds a leak.
 CI (`.github/workflows/`) runs typecheck, lint, knip, format-check, test, build,
 secrets-scan and CodeQL code scanning (`javascript-typescript` and `actions`) on
 push to `master` and on PRs.
+
+### Deploy
+
+- Cloudflare static assets: `wrangler.jsonc` serves `dist/`; `public/_headers`
+  sets the CSP and cache headers. Deploys are connected in the Cloudflare
+  dashboard, not CI (settings in `README.md`).
+- Run the script as `pnpm run deploy`: plain `pnpm deploy` is pnpm's built-in
+  `deploy` command, not the script.
+- `compatibility_date` cannot be newer than the pinned workerd's date
+  (`1.YYYYMMDD.x`); bump the two together.
+
+---
+
+## Footguns / Gotchas
+
+1. **CSP is production-only** - `public/_headers` allows only `'self'` plus
+   Cloudflare Web Analytics. Anything from another origin works under `vite dev`
+   and breaks once deployed, until `_headers` allows it. Check a change with
+   `pnpm build && pnpm exec wrangler dev`, which applies `_headers`.
 
 ---
 

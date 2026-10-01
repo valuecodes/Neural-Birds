@@ -13,6 +13,7 @@
     "dev": "vite --port 3000",
     "build": "vite build",
     "preview": "vite preview",
+    "deploy": "pnpm build && wrangler deploy",
     "typecheck": "tsc",
     "lint": "oxlint --type-aware --report-unused-disable-directives",
     "test": "vitest run",
@@ -20,7 +21,7 @@
     "format:check": "prettier --check .",
     "knip": "knip",
     "secrets:scan": "sh scripts/secrets-scan.sh",
-    "clean": "rm -rf node_modules .cache dist"
+    "clean": "rm -rf node_modules .cache .wrangler dist"
   },
   "dependencies": {
     "@tensorflow/tfjs": "4.22.0",
@@ -41,6 +42,7 @@
     "prettier": "3.9.7",
     "typescript": "7.0.2",
     "vite": "8.3.0",
-    "vitest": "5.0.1"
+    "vitest": "5.0.1",
+    "wrangler": "4.131.2"
   }
 }
