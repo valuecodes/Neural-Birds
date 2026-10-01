@@ -1,39 +1,46 @@
 {
-  "name": "nnbird",
+  "name": "neural-birds",
+  "description": "Neuroevolution simulator based on Flappy Bird",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@tensorflow/tfjs-node": "^1.2.11",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
-    "chart.js": "^2.9.3",
-    "react": "^16.13.1",
-    "react-chartjs-2": "^2.9.0",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+  "type": "module",
+  "engines": {
+    "node": "^24.21.0 || >=26.0.0",
+    "pnpm": ">=12.0.0"
   },
+  "packageManager": "pnpm@12.4.2+sha512.08adc6613180275c7c9edada39dcf08c9c61ad4e7eaf330a4f3461f102b0f907423454d117f98e72d47fef0616070644d7bffc973a6a57f5090a6d7c368b07c9",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite --port 3000",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc",
+    "lint": "oxlint --type-aware --report-unused-disable-directives",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "knip": "knip",
+    "secrets:scan": "sh scripts/secrets-scan.sh",
+    "clean": "rm -rf node_modules .cache dist"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "@tensorflow/tfjs": "4.22.0",
+    "chart.js": "4.5.1",
+    "react": "19.3.0",
+    "react-chartjs-2": "5.3.1",
+    "react-dom": "19.3.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:5000/"
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "4.7.1",
+    "@types/node": "26.5.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "knip": "6.36.0",
+    "oxlint": "1.83.0",
+    "oxlint-tsgolint": "7.0.2001",
+    "prettier": "3.9.7",
+    "typescript": "7.0.2",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
+  }
 }
