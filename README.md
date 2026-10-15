@@ -51,9 +51,22 @@ so pinning versions there would be too late:
 
 Keep them in step with `.nvmrc` and the `packageManager` field.
 
+### Web Analytics
+
+Cloudflare Web Analytics is optional. Add the site in the dashboard (Web
+Analytics → Add a site) with manual JS snippet installation, not automatic
+injection, which would load a second beacon. Copy the `token` from its snippet
+into the build variable `VITE_CF_BEACON_TOKEN` (Settings → Build → Variables).
+Set it on the production build only: preview builds then have no beacon and
+don't report into the site. The token is public: the build puts the beacon
+`<script>` into `index.html`. Without the variable the page has no beacon.
+
 To deploy from your machine instead, run `pnpm exec wrangler login` once, then
 `pnpm run deploy`. Use `pnpm run deploy`, not `pnpm deploy`: `deploy` is also a
 built-in pnpm command, and the shorthand runs that one instead of the script.
+A local deploy builds on your machine, so it only has the beacon if
+`VITE_CF_BEACON_TOKEN` is set in that shell; without it, the deploy replaces the
+live page with one that reports nothing.
 
 To serve the app on a custom domain, the domain needs to be an active zone in the
 same Cloudflare account. Then add it under the Worker's Settings → Domains & Routes

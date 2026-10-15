@@ -66,6 +66,10 @@ push to `master` and on PRs.
 - Cloudflare static assets: `wrangler.jsonc` serves `dist/`; `public/_headers`
   sets the CSP and cache headers. Deploys are connected in the Cloudflare
   dashboard, not CI (settings in `README.md`).
+- `VITE_CF_BEACON_TOKEN` is an optional build variable, the Web Analytics token:
+  `vite.config.ts` adds the beacon script to `index.html` only when it is set
+  (production builds only, and the dashboard site on manual installation, so
+  there is one beacon).
 - Run the script as `pnpm run deploy`: plain `pnpm deploy` is pnpm's built-in
   `deploy` command, not the script.
 - `compatibility_date` cannot be newer than the pinned workerd's date
